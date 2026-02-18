@@ -16,6 +16,7 @@ contract ERC20 {
     }
 
     mapping(address => uint256) balance;
+    mapping(address => mapping(address => uint256)) public allowance;
 
     function name() public view returns(string memory){
         return tokenName;
@@ -41,12 +42,24 @@ contract ERC20 {
     event Transfer(address indexed _owner  address indexed _to, uint256 _value);
 
     function transfer(address _to, uint256 _value)public returns(bool){
+        require(_to != address(0), "Address zero detected");
         require(balance[msg.sender] >= _value, "Insufficient funds");
         balance[msg.sender] = balance[msg.sender] - _value;
         balance[_to] = balance[_to] + _value;
         emit Transfer(msg.sender, _to, _value);
         return true;
     }
+
+    function transferFrom(address _from, address _to, uint256 _value) public returns (bool){
+        require(allowance[_from][msg.sender] <= _value, "not approved");
+        allowance[_from][_to] -= _value;
+        balance[_from] -= _value;
+        balance[_to] +=  _value;
+        emit Transfer(_from, _to, _value);
+        return true;
+    }
+
+    
 
 
 
