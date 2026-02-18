@@ -1,24 +1,15 @@
-// SPDX-License-Identifier: UNLICENSED
-pragma solidity ^0.8.13;
+// // SPDX-License-Identifier: UNLICENSED
+// pragma solidity ^0.8.13;
 
-import {Test} from "forge-std/Test.sol";
-import {Counter} from "../src/Counter.sol";
+// import {Test} from "forge-std/Test.sol";
+// import {ERC20} from "../src/ERC20.sol";
 
-contract CounterTest is Test {
-    Counter public counter;
+// contract ERC20Test is Test {
+//     ERC20 public erc20;
 
-    function setUp() public {
-        counter = new Counter();
-        counter.setNumber(0);
-    }
+//     function setUp() public {
+//         erc20 = new ERC20();
+        
+//     }
 
-    function test_Increment() public {
-        counter.increment();
-        assertEq(counter.number(), 1);
-    }
-
-    function testFuzz_SetNumber(uint256 x) public {
-        counter.setNumber(x);
-        assertEq(counter.number(), x);
-    }
-}
+// }
