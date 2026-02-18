@@ -25,15 +25,28 @@ contract ERC20 {
         return tokenSymbol;
     }
 
-    function decimals() public view returns(uint){
-        return 1e18;
+    function decimals() public view returns(uint8){
+        return 18;
     }
     
     function totalSupply()public view returns(uint256){
         return tokenTotalSupply;
     }
 
-    function 
+    function balanceOf(address _owner) public view returns(uint256){
+        return balance[_owner];
+    }
+
+
+    event Transfer(address indexed _owner  address indexed _to, uint256 _value);
+
+    function transfer(address _to, uint256 _value)public returns(bool){
+        require(balance[msg.sender] >= _value, "Insufficient funds");
+        balance[msg.sender] = balance[msg.sender] - _value;
+        balance[_to] = balance[_to] + _value;
+        emit Transfer(msg.sender, _to, _value);
+        return true;
+    }
 
 
 
